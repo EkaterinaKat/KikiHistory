@@ -35,8 +35,6 @@ public class MainController extends AbstractSwitchController implements FxContro
 
     private List<Section> getSections() {
         return Arrays.asList(new Section("Dates", new MainDatesController(),
-                        controller -> WindowBuilder.getNode(MAIN_DATES, controller)),
-                new Section("Dates", new MainDatesController(),
                         controller -> WindowBuilder.getNode(MAIN_DATES, controller)));
     }
 

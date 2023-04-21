@@ -28,7 +28,8 @@ public class ViewConstants {
     }
 
     public enum HistoryDialogInfo implements WindowBuilder.DialogInfo {
-        MAIN(FXML_LOCATION, "main.fxml", WINDOW_SIZE, CoreConstants.APP_NAME);
+        MAIN(FXML_LOCATION, "main.fxml", WINDOW_SIZE, CoreConstants.APP_NAME),
+        DATES_EDIT(DATES_FXML_LOCATION, "date_dialog.fxml", new Size(500, 500), CoreConstants.APP_NAME);
 
         private final String location;
         private final String fileName;
