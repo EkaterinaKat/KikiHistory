@@ -6,15 +6,15 @@ import com.katyshevtseva.kikihistory.core.model.EntryType;
 
 import java.util.Date;
 
-public class DateService {
+public class EntryService {
 
-    public static void saveEntry(Entry existing, String val1, String val2, String image1) {
+    public static void saveEntry(Entry existing, String val1, String val2, String image1, EntryType type) {
         boolean newOne = existing == null;
         if (existing == null) {
             existing = new Entry();
-            existing.setType(EntryType.DATE);
             existing.setCreationDate(new Date());
         }
+        existing.setType(type);
         existing.setValue1(val1.trim());
         existing.setValue2(val2.trim());
         existing.setImage1(image1);
@@ -25,7 +25,7 @@ public class DateService {
         Dao.delete(entry);
     }
 
-    public static Page<Entry> getDatePage(int pageNum) {
-        return Dao.getEntriesByType(EntryType.DATE, pageNum, 20);
+    public static Page<Entry> getPage(int pageNum) {
+        return Dao.getEntries(pageNum, 20);
     }
 }

@@ -1,5 +1,6 @@
 package com.katyshevtseva.kikihistory.view.dates;
 
+import com.katyshevtseva.fx.FxUtils;
 import com.katyshevtseva.fx.Size;
 import com.katyshevtseva.fx.Styler;
 import com.katyshevtseva.fx.WindowBuilder;
@@ -7,7 +8,7 @@ import com.katyshevtseva.fx.component.ComponentBuilder;
 import com.katyshevtseva.fx.component.controller.PageableBlockListController;
 import com.katyshevtseva.fx.dialog.StandardDialogBuilder;
 import com.katyshevtseva.fx.switchcontroller.SectionController;
-import com.katyshevtseva.kikihistory.core.DateService;
+import com.katyshevtseva.kikihistory.core.EntryService;
 import com.katyshevtseva.kikihistory.core.model.Entry;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -55,15 +56,16 @@ public class DatesListController implements SectionController {
     }
 
     private Node getEntryNode(Entry entry, int blockWidth) {
-        Label dateLabel = new Label(entry.getValue2());
-        Label eventLabel = new Label(entry.getValue1());
+        Label label1 = FxUtils.getLabel(entry.getValue1(), 800);
+        Label label2 = FxUtils.getLabel(entry.getValue2(), 800);
 
         VBox vBox = new VBox();
         vBox.getChildren().addAll(
                 getPaneWithHeight(10),
-                dateLabel,
+                label1,
                 getPaneWithHeight(10),
-                eventLabel);
+                label2,
+                getPaneWithHeight(10));
 
         HBox hBox = new HBox();
         hBox.getChildren().addAll(getPaneWithWidth(10), vBox, getPaneWithWidth(10));
@@ -82,7 +84,7 @@ public class DatesListController implements SectionController {
         MenuItem deleteItem = new MenuItem("Delete");
         deleteItem.setOnAction(event1 -> new StandardDialogBuilder().openQuestionDialog("Delete?", b -> {
             if (b) {
-                DateService.delete(entry);
+                EntryService.delete(entry);
                 updateContent();
             }
         }));
@@ -92,6 +94,6 @@ public class DatesListController implements SectionController {
     }
 
     private void updateContent() {
-        entryListController.show(DateService::getDatePage, this::getEntryNode);
+        entryListController.show(EntryService::getPage, this::getEntryNode);
     }
 }

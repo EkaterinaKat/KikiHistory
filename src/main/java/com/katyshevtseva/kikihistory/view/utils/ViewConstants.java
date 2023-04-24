@@ -7,12 +7,11 @@ import lombok.Getter;
 
 public class ViewConstants {
     private static final String FXML_LOCATION = "/fxml/";
-    private static final String DATES_FXML_LOCATION = "/fxml/dates/";
     public static final Size WINDOW_SIZE = new Size(1000, 1500);
 
     public enum HistoryNodeInfo implements WindowBuilder.NodeInfo {
         MAIN_DATES(FXML_LOCATION, "section_main.fxml"),
-        DATES_LIST(DATES_FXML_LOCATION, "dates_list.fxml");
+        DATES_LIST(FXML_LOCATION, "entries_list.fxml");
 
         private final String location;
         private final String fileName;
@@ -29,7 +28,7 @@ public class ViewConstants {
 
     public enum HistoryDialogInfo implements WindowBuilder.DialogInfo {
         MAIN(FXML_LOCATION, "main.fxml", WINDOW_SIZE, CoreConstants.APP_NAME),
-        DATES_EDIT(DATES_FXML_LOCATION, "date_dialog.fxml", new Size(500, 500), CoreConstants.APP_NAME);
+        DATES_EDIT(FXML_LOCATION, "entry_edit_dialog.fxml", new Size(700, 700), CoreConstants.APP_NAME);
 
         private final String location;
         private final String fileName;

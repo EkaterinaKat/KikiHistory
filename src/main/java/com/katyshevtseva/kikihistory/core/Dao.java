@@ -2,8 +2,8 @@ package com.katyshevtseva.kikihistory.core;
 
 import com.katyshevtseva.general.Page;
 import com.katyshevtseva.hibernate.CoreDao;
+import com.katyshevtseva.hibernate.PageableQuery;
 import com.katyshevtseva.kikihistory.core.model.Entry;
-import com.katyshevtseva.kikihistory.core.model.EntryType;
 import org.hibernate.criterion.Order;
 
 public class Dao {
@@ -17,7 +17,9 @@ public class Dao {
         coreDao.delete(t);
     }
 
-    public static Page<Entry> getEntriesByType(EntryType type, int pageNum, int pageSize) {
-        return coreDao.findBy(Entry.class, "type", type, pageNum, pageSize, Order.desc("id"));
+    public static Page<Entry> getEntries(int pageNum, int pageSize) {
+        return coreDao.find(
+                new PageableQuery<>(Entry.class, pageNum, pageSize)
+                        .setOrder(Order.desc("id")));
     }
 }
